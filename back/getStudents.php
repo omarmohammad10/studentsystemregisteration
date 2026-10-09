@@ -14,7 +14,7 @@ function getStudents(string $search = "", int $page = 1)
           OR email LIKE '%{$search}%' 
           OR age LIKE '%{$search}%' 
           OR phone LIKE '%{$search}%'
-          LIMIT 10 OFFSET {$offset} ;");
+          LIMIT 10 OFFSET {$offset};");
 
   $result = $stmt->fetchAll();
 
@@ -24,8 +24,7 @@ function getStudents(string $search = "", int $page = 1)
 function getStudentsCount(string $search = ""){
   $DB = connection();
   $stmt = $DB->query("SELECT COUNT(*) AS total FROM students
-          WHERE first_name LIKE '%{$search}%' 
-          OR last_name LIKE '%{$search}%' 
+          WHERE CONCAT(first_name , ' ' , last_name) LIKE '%{$search}%'  
           OR email LIKE '%{$search}%' 
           OR age LIKE '%{$search}%' 
           OR phone LIKE '%{$search}%';");

@@ -13,7 +13,6 @@ $("#SearchForm").submit(function (e) {
 })
 
 
-
 function searchStudents(search, page) {
   $.ajax({
     url: "back/search.php",
@@ -46,8 +45,8 @@ function showStudents(students) {
 
 
   for (let i = 0; i < students.length; i++) {
-    
     if (students.length == 0) {
+      $("tbody").html("");
       Swal.fire({
         title: "Oops!",
         text: "No students here",
@@ -67,7 +66,7 @@ function showStudents(students) {
             <td>${students[i]['phone']}</td>
             <td>
               <div class='buttons'>
-                <a class='btn btn-info text-light' href='editStudentForm.php?student_id=${students[i]['id']}}'>Edit</a>
+                <a class='btn btn-info text-light' href='editStudentForm.php?student_id=${students[i]['id']}'>Edit</a>
                 <button class='btn btn-danger' onclick='deleteStudent(${students[i]['id']})'>Delete</button>
               </div>
             </td>
@@ -148,7 +147,6 @@ $(document).on("click", "ul.pagination .page-link", function (e) {
   let page = $(this).data('page');
   let search = $("#SearchInput").val();
   searchStudents(search, page);
-  changePage(page);
 });
 
 
