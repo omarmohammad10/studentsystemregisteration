@@ -15,11 +15,9 @@ if (!isset($_GET['student_id'])) {
 if (empty($_SESSION['_errors'])) {
   $DB = connection();
 
-
-
   $stmt = $DB->query("SELECT id, first_name as firstName,
-last_name as lastName , email , age , phone
-FROM students WHERE id = '{$_GET['student_id']}'");
+  last_name as lastName , email , age , phone
+  FROM students WHERE id = '{$_GET['student_id']}'");
 
   $student = $stmt->fetch();
 

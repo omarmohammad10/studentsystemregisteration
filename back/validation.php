@@ -31,13 +31,12 @@ function editValidate()
     if ($field != 'password') {
       validateRequired($field, $value);
     }
-
     if ($field == 'email') {
       validateEmail($field, $value);
-      validateUnique($field, $value, 'students', $_POST['student_id']);
+      validateUnique($field, $value, 'students', $_GET['student_id']);
     } else if ($field == 'phone') {
       validateEGPhone($field, $value);
-      validateUnique($field, $value, 'students', $_POST['student_id']);
+      validateUnique($field, $value, 'students', $_GET['student_id']);
     } else if ($field == 'age') {
       validateAge($field, $value);
     }
@@ -116,8 +115,7 @@ function validateUnique(string $field, mixed $value, string $tableName, ?int $ex
     $subQuery = "AND id != '{$exceptId}'";
   }
 
-  $stmt = $DB->query("SELECT * FROM {$tableName} WHERE {$field} = '{$value}' 
-  {$subQuery};");
+  $stmt = $DB->query("SELECT * FROM {$tableName} WHERE {$field} = '{$value}' {$subQuery};");
 
   $result = $stmt->fetchAll();
 

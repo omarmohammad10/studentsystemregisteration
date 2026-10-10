@@ -22,7 +22,9 @@ function searchStudents(search, page) {
       page: page
     },
     success: function (data) {
-      console.log(data);
+      console.log("Students:", data.students);
+      console.log("Total:", data.total);
+      console.log("Page:", data.page);
       showStudents(data.students);
       showPagination(data.total, data.page);
     },
@@ -37,23 +39,21 @@ function searchStudents(search, page) {
 }
 
 function showStudents(students) {
-
-  $("tbody").html("");
-
   let tbodyContent = "";
 
-
+  if (students.length == 0) {
+    // $("tbody").html("");
+    Swal.fire({
+      title: "Oops!",
+      text: "No students here",
+      icon: "error"
+    });
+    $("#SearchInput").val("");
+    oldSearch = "";
+    searchStudents("", 1);
+  }
 
   for (let i = 0; i < students.length; i++) {
-    if (students.length == 0) {
-      $("tbody").html("");
-      Swal.fire({
-        title: "Oops!",
-        text: "No students here",
-        icon: "error"
-      });
-      return;
-    }
 
     let shortPass = students[i]['password'].slice(0, 15);
     tbodyContent += `
@@ -80,6 +80,8 @@ function showStudents(students) {
 
 function showPagination(total, currentPage = 1) {
 
+  total = Number(total);
+  currentPage = Number(currentPage);
   let pagesNumber = Math.ceil(total / 10);
 
   let liHTML = "";
@@ -144,9 +146,10 @@ $(document).on("click", "ul.pagination .page-link", function (e) {
   if ($(this).hasClass("disabled") || $(this).hasClass("active")) {
     return;
   }
-  let page = $(this).data('page');
+  let page = Number($(this).data('page'));
   let search = $("#SearchInput").val();
   searchStudents(search, page);
+  console.log(page);
 });
 
 

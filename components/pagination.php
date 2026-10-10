@@ -15,15 +15,15 @@ for ($i = 0; $i <= $pagesNumber + 1; $i++) {
   if ($i == 0) {
     $isDisabled = ($currentPage == 1) ? 'disabled' : "";
     $prevPage = ($currentPage == 1) ? 1 : $currentPage - 1;
-    $liHTML .= "<li class='page-item'><a class='page-link {$isDisabled}' href='#' page={$prevPage}'>Previous</a></li>";
+    $liHTML .= "<li class='page-item'><a class='page-link {$isDisabled}' href='#' data-page='{$prevPage}'>Previous</a></li>";
   } else if ($i == $pagesNumber + 1) {
     $isDisabled = ($currentPage == $pagesNumber) ? 'disabled' : "";
     $nextPage = ($currentPage == $pagesNumber) ? $pagesNumber : $currentPage + 1;
-    $liHTML .= "<li class='page-item'><a class='page-link {$isDisabled}' href='#' page={$nextPage}'>Next</a></li>
+    $liHTML .= "<li class='page-item'><a class='page-link {$isDisabled}' href='#' data-page='{$nextPage}'>Next</a></li>
           ";
   } else {
     $isActive = ($i == $currentPage) ? 'active' : "";
-    $liHTML .= "<li class='page-item'><a class='page-link {$isActive}' href='#' page={$i}'>{$i}</a></li>";
+    $liHTML .= "<li class='page-item'><a class='page-link {$isActive}' href='#' data-page='{$i}'>{$i}</a></li>";
   }
 }
 

@@ -24,6 +24,7 @@ require_once __DIR__ . "/back/getStudent.php";
 
 
 <body class="text-light">
+  
   <div id="Edit" class="pt-5">
     <div class="header text-center">
       <img src="assets/images/logo.png" alt="Logo">
@@ -31,7 +32,7 @@ require_once __DIR__ . "/back/getStudent.php";
 
     <div class="body">
       <form class="w-50 m-auto" action="back/edit.php" method="POST">
-        <input type="hidden" name="student_id" value="<?= old('id') ?>">
+        <input type="hidden" name="student_id" value="<?= $_GET['student_id'] ?>">
         <div class="row">
           <div class="col-lg-6 mb-3">
             <div class="item">
@@ -89,7 +90,7 @@ require_once __DIR__ . "/back/getStudent.php";
           </div>
         </div>
 
-        <button type="submit" class="btn btn-info text-light w-100">Edit</button>
+        <button type="submit" class="btn btn-info text-light w-100 mb-3">Edit</button>
       </form>
     </div>
   </div>
